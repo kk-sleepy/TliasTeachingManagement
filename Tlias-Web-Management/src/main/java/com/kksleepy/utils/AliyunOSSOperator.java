@@ -18,11 +18,11 @@ public class AliyunOSSOperator {
     @Autowired
     private AliyunOSSProperties aliyunOSSProperties;
 
-    private String endpoint = aliyunOSSProperties.getEndpoint();
-    private String bucketName = aliyunOSSProperties.getBucketName();
-    private String region = aliyunOSSProperties.getRegion();
 
     public String upload(byte[] content, String originalFilename) throws Exception {
+        String endpoint = aliyunOSSProperties.getEndpoint();
+        String bucketName = aliyunOSSProperties.getBucketName();
+        String region = aliyunOSSProperties.getRegion();
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
         EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
 
