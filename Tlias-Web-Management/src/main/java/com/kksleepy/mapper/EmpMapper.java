@@ -2,14 +2,11 @@ package com.kksleepy.mapper;
 
 import com.kksleepy.pojo.Emp;
 import com.kksleepy.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 操作员工基本信息
@@ -46,4 +43,10 @@ public interface EmpMapper {
     Emp getById(Integer id);
 
     void updateById(Emp emp);
+
+    @MapKey("pos")
+    List<Map<String,Object>> countEmpJobData();
+
+    @MapKey("name")
+    List<Map<String, Object>> countGenderData();
 }

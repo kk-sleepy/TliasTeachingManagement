@@ -49,14 +49,32 @@
     </resultMap>
     <select id="getById" resultMap="empResultMap">
         select e.*,
-               ee.id ee_id,
-                ee.emp_id ee_emp_id,
-                ee.begin ee_begin,
-                ee.end ee_end,
-                ee.company ee_company,
-                ee.job ee_job
-               from emp e left join tlias.emp_expr ee on e.id = ee.emp_id
+               ee.id      ee_id,
+               ee.emp_id  ee_emp_id,
+               ee.begin   ee_begin,
+               ee.end     ee_end,
+               ee.company ee_company,
+               ee.job     ee_job
+        from emp e
+                 left join tlias.emp_expr ee on e.id = ee.emp_id
         where e.id = #{id}
+    </select>
+    <select id="countEmpJobData" resultType="java.util.Map"> select (case
+                                                                         when job = 1 then '班主任'
+                                                                         when job = 2 then '讲师'
+                                                                         when job = 3 then '学工主管'
+                                                                         when job = 4 then '教研主管'
+                                                                         when job = 5 then '咨询师'
+                                                                         else '其他' end) pos,
+                                                                    count(*)              num
+                                                             from emp
+                                                             group by job
+                                                             order by num </select>
+    <select id="countGenderData" resultType="java.util.Map">
+        select if(gender = 1, '男性员工', '女性员工') name,
+               count(*) value
+        from emp
+        group by gender
     </select>
     <update id="updateById">
         update emp
