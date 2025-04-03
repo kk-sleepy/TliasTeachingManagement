@@ -93,6 +93,11 @@
             <version>3.0.4</version>
             <scope>test</scope>
         </dependency>
+        <!-- AOP起步依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

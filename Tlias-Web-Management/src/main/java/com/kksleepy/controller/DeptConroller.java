@@ -1,5 +1,6 @@
 package com.kksleepy.controller;
 
+import com.kksleepy.anno.Log;
 import com.kksleepy.pojo.Dept;
 import com.kksleepy.pojo.Result;
 import com.kksleepy.service.DeptService;
@@ -36,6 +37,7 @@ public class DeptConroller {
      * 一旦声明了@RequestParam，参数就必须传递，或者可以把required改为false
      * 如果前端传递的参数名和接收的参数名相同，则可以省略注解
      */
+    @Log
     @DeleteMapping
     public Result delete(@RequestParam(value = "id", required = false) Integer DeptId) {
         log.info("要删除的部门id: {}", DeptId);
@@ -46,6 +48,7 @@ public class DeptConroller {
     /**
      * 需要保证封装对象中包含JSON数据的属性，可多不可少
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {
         log.info("新增部门信息: {}", dept);
@@ -63,6 +66,7 @@ public class DeptConroller {
         return Result.success(dept);
     }
 
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         log.info("要更新的数据：{}", dept);

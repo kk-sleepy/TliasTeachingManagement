@@ -94,3 +94,36 @@ public @interface LogOperation {
 @Around("@annotation(com.itheima.anno.LogOperation)") 
 ```
 
+## 1.4 连接点
+
+- 在环绕通知中使用ProceedingJoinPoint获取。
+- 在非环绕通知中使用JoinPoint获取。
+
+```java
+@Around("@annotation(com.itheima.anno.LogOperation)") //切入点表达式
+public Object recordTime(ProceedingJoinPoint pjp) throws Throwable {
+
+    long begin = System.currentTimeMillis();
+    Object result = pjp.proceed(); //执行目标方法
+
+    long end = System.currentTimeMillis();
+    log.info("方法:{} 执行耗时：{}ms", pjp.getSignature(),end - begin);
+    return result;
+}
+@Before("execution(* com.itheima.service.impl.*.*(..))")
+public void before(JoinPoint joinPoint) {
+    log.info("方法:{} 执行前", joinPoint.getSignature());
+}
+```
+
+## 2、ThreadLocal
+
+什么是ThreadLocal
+
+- ThreadLocal其实是线程的局部变量，为每个线程提供单独一份存储空间，具有线程隔离的效果，不同的线程之间不会相互干扰
+
+ThreadLocal的应用场景
+
+- 在同一个线程/同一个请求中，进行数据共享。
+
+![image-20250403232700446](./assets/image-20250403232700446.png)
