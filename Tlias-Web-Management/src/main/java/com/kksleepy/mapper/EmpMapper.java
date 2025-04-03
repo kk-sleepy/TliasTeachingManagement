@@ -49,4 +49,7 @@ public interface EmpMapper {
 
     @MapKey("name")
     List<Map<String, Object>> countGenderData();
+
+    @Select("select id,username,name from emp where username = #{username} and password = #{password}")
+    Emp selectByUserNameAndPassword(Emp emp);
 }

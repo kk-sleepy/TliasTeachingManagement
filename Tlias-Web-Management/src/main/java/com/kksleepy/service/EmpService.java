@@ -2,6 +2,7 @@ package com.kksleepy.service;
 
 import com.kksleepy.pojo.Emp;
 import com.kksleepy.pojo.EmpQueryParam;
+import com.kksleepy.pojo.LoginInfo;
 import com.kksleepy.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -20,4 +21,6 @@ public interface EmpService {
     Emp getInfo(Integer id);
 
     void update(Emp emp);
+
+    LoginInfo login(Emp emp);
 }
